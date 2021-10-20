@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -47,8 +48,10 @@ class _LibraryPageState extends State<LibraryPage> {
   void searchResultRemove(BookList b){
     setState(() {
       for(int i=0 ; i<searchList.length ; i++) {
-        if(searchList[i] == b){
+        if(searchList[i] == b ){
           searchList.remove(b);}
+      }
+      for(int i=0 ; i<booksList.length ; i++){
         if(booksList[i] == b){
           booksList[i].wishList = 0;
           booksList[i]._bookmark = const Icon(
@@ -158,7 +161,6 @@ class _LibraryPageState extends State<LibraryPage> {
               child: Row(
                 children: <Widget>[
                   IconButton(
-                    //padding: EdgeInsets.fromLTRB(10, 0, 100, 0),
                       icon: customIcon,
                       onPressed: (){
                         setState(() {
@@ -179,7 +181,9 @@ class _LibraryPageState extends State<LibraryPage> {
                   itemCount: booksList.length,
                   itemBuilder: (context,index){
                     return ListTile(
-                      onTap: (){},
+                      onTap: (){
+                        Navigator.pushReplacementNamed(context, '/bookstats');
+                      },
                       trailing: IconButton(onPressed: (){
                         setState(() {
                           if(booksList[index].wishList==0)
@@ -235,11 +239,16 @@ class _LibraryPageState extends State<LibraryPage> {
                 ): (_selectedIndex==1?
 
                 ListView.builder(
+                  primary: true,
+                  //keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+                  //physics: ScrollPhysics(),
                   shrinkWrap: true,
                   itemCount: searchList.length,
                   itemBuilder: (context,index){
                     return ListTile(
-                      onTap: (){},
+                      onTap: (){
+                        Navigator.pushNamed(context, '/bookstats');
+                      },
                       trailing: IconButton(onPressed: (){
                         setState(() {
                           searchList[index].wishList = 0;
@@ -250,8 +259,7 @@ class _LibraryPageState extends State<LibraryPage> {
                       ),
                       title: Card(
                         elevation: 0,
-                        child: //booksList[index].wishList==1?
-                        Row(
+                        child: Row(
                           children: [
                             Image.asset(searchList[index].image,height: 150,width: 90),
                             const SizedBox(width: 10,),

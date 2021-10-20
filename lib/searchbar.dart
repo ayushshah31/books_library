@@ -115,7 +115,9 @@ class _SearchBarOPState extends State<SearchBarOP> {
                     itemBuilder: (BuildContext context, int index) {
                       String listData = searchresult[index];
                       return ListTile(
-                        onTap: (){},
+                        onTap: (){
+                          Navigator.pushNamed(context, '/bookstats');
+                        },
                         title: Text(
                             listData,
                           style: TextStyle(color: Colors.white)
@@ -129,7 +131,9 @@ class _SearchBarOPState extends State<SearchBarOP> {
                     itemBuilder: (BuildContext context, int index) {
                       String listData = bookNameList[index];
                       return ListTile(
-                        onTap: (){},
+                        onTap: (){
+                          Navigator.pushNamed(context, '/bookstats');
+                        },
                         title: Text(
                           listData,
                             style: TextStyle(color: Colors.white)
